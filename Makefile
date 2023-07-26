@@ -26,6 +26,7 @@ compile: setup
 
 	@$(CC) $(CFLAGS) -o $(OBJS)/history.o -c source/history.c
 	@$(CC) $(CFLAGS) -o $(OBJS)/parser.o -c source/parser.c
+	@$(CC) $(CFLAGS) -o $(OBJS)/console.o -c source/console.c
 
 	@echo "   done"
 

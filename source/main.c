@@ -9,41 +9,32 @@
 
 #include <stdio.h>                              // printf()
 
-#include "history.h"
+#include "console.h"
+
+#define HISTORY_MAX 5
 
 int
 main ()
 {
-    history_t * p_hist = history_create(5);
-    if (NULL == p_hist)
+    // Create the console context.
+    console_t * p_console = console_create(HISTORY_MAX);
+    if (NULL == p_console)
     {
-        printf("create\n");
+        printf("Failed to instantiate console\n");
         return 1;
     }
 
-    if ((-1 == history_push(p_hist, "command 1")) ||
-        (-1 == history_push(p_hist, "command 2")) ||
-        (-1 == history_push(p_hist, "command 3")) ||
-        (-1 == history_push(p_hist, "command 4")) ||
-        (-1 == history_push(p_hist, "command 5")) ||
-        (-1 == history_push(p_hist, "command 6")))
+    // Run the console context.
+    console_run(p_console);
+
+    // Deallocate the console context.
+    if (-1 == console_destroy(p_console))
     {
-        printf("push\n");
+        printf("Failed to destroy console\n");
         return 1;
     }
 
-    for (size_t i = 0; i < p_hist->size; ++i)
-    {
-        printf("[%lu]: '%s'\n", i, p_hist->pp_data[i]);
-    }
-
-    if (-1 == history_destroy(p_hist))
-    {
-        printf("destroy\n");
-        return 1;
-    }
-
-    printf("success\n");
+    printf("Exited with success\n");
     return 0;
 }
 

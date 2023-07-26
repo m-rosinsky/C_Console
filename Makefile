@@ -25,6 +25,7 @@ compile: setup
 	@echo -n "Compiling sources..."
 
 	@$(CC) $(CFLAGS) -o $(OBJS)/history.o -c source/history.c
+	@$(CC) $(CFLAGS) -o $(OBJS)/parser.o -c source/parser.c
 
 	@echo "   done"
 
